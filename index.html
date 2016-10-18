@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map-canvas {
+            width: 180px;
+            height: 180px;
+        }
+    </style>
+</head>
+<body>
+<div class="mod aside-mod">
+    <div class="map">
+        <div id="map" class="container"></div>
+        <a id="J_map-show" class="map-zoom"><i class="icon"></i></a>
+    </div>
+</div>
+
+
+<div id="map-canvas"></div>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=I3OBZ-MBSRQ-WBJ5P-G5VZS-QGAIF-Y7B27"></script>
+<script>
+    function init() {
+        var center = new qq.maps.LatLng(31.24034, 121.49013);
+        var map = new qq.maps.Map(document.getElementById("map-canvas"),
+                {
+                    center: center,
+                    zoom: 15,//滚动控件的初始启用/停用状态。
+                    panControl: false,         //平移控件的初始启用/停用状态。
+                    zoomControl: true,       //缩放控件的初始启用/停用状态。
+                    scaleControl: false,
+                    mapTypeControlOptions: {
+                        //设置控件的地图类型ID，ROADMAP显示普通街道地图，SATELLITE显示卫星图像，HYBRID显示卫星图像上的主要街道透明层
+                        mapTypeIds: [
+                            qq.maps.MapTypeId.ROADMAP,
+                            qq.maps.MapTypeId.SATELLITE,
+                            qq.maps.MapTypeId.HYBRID
+                        ],
+                        //设置控件位置相对上方中间位置对齐
+                        position: qq.maps.ControlPosition
+                    },
+                    zoomControlOptions: {                   //设置缩放控件的样式状态
+                        style: qq.maps.ZoomControlStyle.SMALL
+                    }
+                });
+
+        var marker = new qq.maps.Marker({
+            //设置Marker的位置坐标
+            position: center,
+            //设置显示Marker的地图
+            map: map
+        });
+
+        //设置Marker的可见性，为true时可见,false时不可见，默认属性为true
+        marker.setVisible(true);
+        //设置Marker的动画属性为从落下
+        marker.setAnimation(qq.maps.MarkerAnimation.DOWN);
+        //设置Marker是否可以被拖拽，为true时可拖拽，false时不可拖拽，默认属性为false
+        marker.setDraggable(false);
+        ////设置Marker自定义图标的属性，size是图标尺寸，该尺寸为显示图标的实际尺寸，origin是切图坐标，该坐标是相对于图片左上角默认为（0,0）的相对像素坐标，anchor是锚点坐标，描述经纬度点对应图标中的位置
+        var anchor = new qq.maps.Point(center),
+                size = new qq.maps.Size(30, 46),
+                origin = new qq.maps.Point(0, 0),
+                icon = new qq.maps.MarkerImage(
+                        "icon-map.png",
+                        size,
+                        origin
+                );
+        marker.setIcon(icon);
+
+        //设置标注的名称，当鼠标划过Marker时显示
+//        marker.setTitle("测试");
+    }
+    init();
+</script>
+
+</body>
+</html>

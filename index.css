@@ -1,0 +1,14 @@
+#map {
+    width: 400px;
+    height: 400px;
+}
+
+#ife {
+    border:5px solid red;
+}
+
+
+
+#page_container {
+    display: none;
+}
